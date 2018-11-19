@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".MenuActivity"></activity>
     </application>
 
 </manifest>

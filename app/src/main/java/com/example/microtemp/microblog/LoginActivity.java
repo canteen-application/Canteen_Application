@@ -11,61 +11,74 @@ import android.widget.Toast;
 
 import com.example.microtemp.microblog.api.HttpRequestData;
 import com.example.microtemp.microblog.api.HttpRequestMethods;
+import com.example.microtemp.microblog.api.handlers.LoginRequestHandler;
 import com.example.microtemp.microblog.api.handlers.RegisterRequestHandler;
+import com.example.microtemp.microblog.api.models.requests.LoginRequestBody;
 import com.example.microtemp.microblog.api.models.requests.RegisterRequestBody;
+import com.example.microtemp.microblog.api.models.responses.LoginResponse;
 import com.example.microtemp.microblog.api.models.responses.RegisterResponse;
 
-public class LoginActivity extends AppCompatActivity {
 
-    private static String LOG_TAG = "LoginActivity";
-    Button loginBtn,registerBtn;
+public class LoginActivity extends AppCompatActivity {
+    Button loginBtn, registerBtn;
     EditText email,password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //
         setContentView(R.layout.activity_login);
         email = findViewById(R.id.email) ;
         password = findViewById(R.id.password) ;
-
-        loginBtn =findViewById(R.id.sign_in_button);
+        loginBtn = findViewById(R.id.sign_in_button);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // FIXME
-//                Toast.makeText(LoginActivity.this, "test", Toast.LENGTH_SHORT).show();
-//                new MakeNetworkCall().execute("http://212.191.92.88:5101/"+"email/"+email.getText() +"/haslo/"+ password.getText(), "Get");
+                if(email.getText().toString().equals("")|| password.getText().toString().equals("")) {
+                    Toast.makeText(LoginActivity.this, "Bad mail or password", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    LoginRequestBody requestBody = LoginRequestBody.builder()
+                            .email(email.getText().toString())
+                            .password(password.getText().toString())
+                            .build();
+                    HttpRequestData<LoginRequestBody> requestData = HttpRequestData.<LoginRequestBody>builder()
+                            .requestBody(requestBody)
+                            .method(HttpRequestMethods.POST)
+                            .build();
+
+                    new LoginRequestHandler() {
+                        @Override
+                        protected void onPostExecute(LoginResponse result) {
+                            if(result.getHttpStatusCode()==200) {
+                                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                                startActivity(intent);
+                            }
+                            else {
+                                // FIXX bledy
+                                Toast.makeText(LoginActivity.this, "Nie mozna sie zalogowac", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }.execute(requestData);
+
+
+                }
+           //  new MakeNetworkCall().execute("http://212.191.92.88:5101/"+"email/"+email.getText() +"/haslo/"+ password.getText(), "Get");
             }
         });
-
         registerBtn = findViewById(R.id.register_button);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RegisterRequestBody requestBody = RegisterRequestBody.builder()
-                        .email(email.getText().toString())
-                        .password(password.getText().toString())
-                        .build();
-                HttpRequestData<RegisterRequestBody> requestData = HttpRequestData.<RegisterRequestBody>builder()
-                        .requestBody(requestBody)
-                        .method(HttpRequestMethods.POST)
-                        .build();
-                new RegisterRequestHandler() {
-                    @Override
-                    protected void onPostExecute(RegisterResponse result) {
-                        if (result.getHttpStatusCode() == 400) {
-                            Toast.makeText(registerBtn.getContext(),
-                                    "Nie można zarejestrować nowego użytkownika, ponieważ nie ma dostępu do internetu",
-                                    Toast.LENGTH_LONG).show();
-                        } else {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("response", result);
-                            startActivity(intent);
-                            Log.d(LOG_TAG, "Result: " + result);
-                        }
-                    }
-                }.execute(requestData);
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
+
+
     }
 }
+

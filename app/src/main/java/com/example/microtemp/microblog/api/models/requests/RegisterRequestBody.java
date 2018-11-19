@@ -10,6 +10,9 @@ import lombok.Setter;
 public class RegisterRequestBody extends RequestBody {
     private String email;
     private String password;
+    private String firstName;
+    private String lastName;
+    private Boolean admin;
 
     @Override
     public String getUrl() {

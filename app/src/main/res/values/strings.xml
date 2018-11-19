@@ -1,15 +1,19 @@
 <resources>
-    <string name="app_name">MicroBlog</string>
+    <string name="app_name">Canteen App</string>
     <string name="title_activity_login">Logowanie</string>
     <!-- Strings related to login -->
-    <string name="mail_login">Email lub nick</string>
-    <string name="prompt_password">Hasło</string>
-    <string name="action_register">Rejestracja</string>
-    <string name="action_sign_in">Zaloguj się</string>
-    <string name="error_invalid_email">Nieprawidłowy email</string>
-    <string name="error_incorrect_password">Nieprawidłowe hasło</string>
-    <string name="error_field_required">To pole jest wymagane!</string>
+    <string name="mail_login">Username or nick</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_register">Registration</string>
+    <string name="register">Register</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="error_invalid_email">Incorrect email or username</string>
+    <string name="error_incorrect_password">Incorrect password</string>
+    <string name="error_field_required">TThis field is necessary!</string>
     <string name="mail_register">Email</string>
+    <string name="surname_register">Surname</string>
+    <string name="name_register">Name</string>
+    <string name="retype_password_register">Retype password</string>
     <string name="nickname_register">Nick</string>
-    <string name="action_back">Cofnij</string>
+    <string name="action_back">Go back</string>
 </resources>

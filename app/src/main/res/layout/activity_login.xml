@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,6 +13,7 @@
     tools:context=".LoginActivity">
 
     <!-- Login progress -->
+
     <ProgressBar
         android:id="@+id/login_progress"
         style="?android:attr/progressBarStyleLarge"
@@ -19,6 +21,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="294dp"
+        android:layout_height="188dp"
+        android:layout_marginBottom="25px"
+        app:srcCompat="@drawable/logo" />
 
     <ScrollView
         android:id="@+id/login_form"
@@ -39,6 +48,7 @@
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:hint="@string/mail_login"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
@@ -54,6 +64,7 @@
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:hint="@string/prompt_password"
                     android:imeActionId="6"
                     android:imeOptions="actionUnspecified"
@@ -65,22 +76,26 @@
 
             <Button
                 android:id="@+id/sign_in_button"
-                style="?android:textAppearanceSmall"
+                style="@android:style/TextAppearance.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_sign_in"
+                android:textColor="@color/colorControlHighlight"
                 android:textStyle="bold" />
+
             <Button
                 android:id="@+id/register_button"
-                style="?android:textAppearanceSmall"
+                style="@android:style/TextAppearance.Small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/action_register"
+                android:textColor="@color/colorControlHighlight"
                 android:textStyle="bold" />
 
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
